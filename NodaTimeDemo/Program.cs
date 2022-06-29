@@ -13,3 +13,5 @@ var diff = Period.Between(start, end);
 Console.WriteLine($"Start is {start}");
 Console.WriteLine($"End is {end}");
 Console.WriteLine($"Diff is {diff.ToDuration()}");
+
+// TODO: Test effects of dst transitions etc
