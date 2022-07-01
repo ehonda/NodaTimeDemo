@@ -1,4 +1,6 @@
-﻿namespace DeliveryService.Deliveries;
+﻿using Common.Deliveries.Dtos;
+
+namespace DeliveryService.Deliveries;
 
 public static class Current
 {
