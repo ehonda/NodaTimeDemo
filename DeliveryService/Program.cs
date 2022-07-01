@@ -2,16 +2,14 @@ using DeliveryService.Deliveries;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Services
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// App
 var app = builder.Build();
 
-// TODO: Remove utc offset on serialization
 app.MapGet("/deliveries", () => Task.FromResult(Current.Deliveries));
 
 // Configure the HTTP request pipeline.
