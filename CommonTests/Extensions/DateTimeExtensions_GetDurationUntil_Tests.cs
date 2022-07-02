@@ -15,6 +15,7 @@ public class DateTimeExtensions_GetDurationUntil_Tests
 {
     private static class ValueSources
     {
+        // TODO: Add UTC and UTC +/- offset to list
         public static IEnumerable<string> AllTzdbTimeZoneIds => DateTimeZoneProviders.Tzdb.Ids;
     }
     
@@ -31,4 +32,6 @@ public class DateTimeExtensions_GetDurationUntil_Tests
 
         start.GetDurationUntil(end).Should().Be(Duration.FromHours(1));
     }
+    
+    // TODO: Test for time zone transition
 }
