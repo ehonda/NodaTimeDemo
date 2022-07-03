@@ -1,7 +1,8 @@
 # TODO
 
 * Custom `ReadyFor` / duration serialization
-  * Use `NodaTime.Serialization` nuget? 
+  * Use `NodaTime.Serialization` nuget? ✅
+  * Adjust swagger schema
 * Test Project
   * Test behavior with dst changes
     * Use mocked time zone with easy transition

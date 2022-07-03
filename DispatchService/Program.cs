@@ -1,10 +1,14 @@
 using Common.Deliveries;
 using DispatchService.Deliveries;
 using DispatchService.Dispatches;
+using Microsoft.AspNetCore.Http.Json;
+using NodaTime.Serialization.SystemTextJson;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Services
+builder.Services.Configure<JsonOptions>(options => options.SerializerOptions.Converters.Add(
+    NodaConverters.DurationConverter));
 // See https://restsharp.dev/v107/#recommended-usage on why to use singleton
 builder.Services.AddSingleton<DeliveryServiceClient>();
 builder.Services.AddControllers();
