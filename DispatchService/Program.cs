@@ -2,20 +2,38 @@ using Common.Deliveries;
 using DispatchService.Deliveries;
 using DispatchService.Dispatches;
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.OpenApi.Any;
+using NodaTime;
 using NodaTime.Serialization.SystemTextJson;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Services
-builder.Services.Configure<JsonOptions>(options => options.SerializerOptions.Converters.Add(
-    NodaConverters.DurationConverter));
+// -----------------------------------------------------------------------------------------------
+
+// Delivery service client
 // See https://restsharp.dev/v107/#recommended-usage on why to use singleton
 builder.Services.AddSingleton<DeliveryServiceClient>();
+
+// Controllers - TODO: Needed with minimal APIs?
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+// Configuration of Duration serialization
+builder.Services.Configure<JsonOptions>(options =>
+    options.SerializerOptions.Converters.Add(NodaConverters.DurationConverter));
+builder.Services.AddSwaggerGen(options =>
+    options.MapType<Duration>(() => new()
+    {
+        Type = "string",
+        Example = new OpenApiString("1:00:00.8188826"),
+        Description = "Standard round trip pattern `j` for serialization is used, " +
+                      "see <https://nodatime.org/3.1.x/userguide/duration-patterns>"
+    }));
 
 // App
+// -----------------------------------------------------------------------------------------------
+
 var app = builder.Build();
 
 app.MapGet("/dispatches", async (DeliveryServiceClient client) =>
