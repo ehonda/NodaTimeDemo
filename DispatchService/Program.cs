@@ -15,8 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 // See https://restsharp.dev/v107/#recommended-usage on why to use singleton
 builder.Services.AddSingleton<DeliveryServiceClient>();
 
-// Controllers - TODO: Needed with minimal APIs?
-builder.Services.AddControllers();
+// ApiExplorer for swagger generation
 builder.Services.AddEndpointsApiExplorer();
 
 // Configuration of Duration serialization
@@ -27,7 +26,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Type = "string",
         Example = new OpenApiString("1:00:00.8188826"),
-        Description = "Standard round trip pattern `j` for serialization is used, " +
+        Description = "Standard round-trip pattern `j` for serialization is used, " +
                       "see <https://nodatime.org/3.1.x/userguide/duration-patterns>"
     }));
 
@@ -53,9 +52,5 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
 
 app.Run();
