@@ -1,0 +1,22 @@
+# Copied mostly from https://docs.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=linux#create-the-dockerfile
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+
+WORKDIR /app
+
+# Copy files
+# Service
+COPY ./DeliveryService ./DeliveryService
+# Common
+COPY ./Common ./Common
+# Restore
+WORKDIR /app/DeliveryService
+RUN dotnet restore
+# Publish
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=build-env /app/DeliveryService/out .
+
+ENTRYPOINT ["dotnet", "DeliveryService.dll"]
