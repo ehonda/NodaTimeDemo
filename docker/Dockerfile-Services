@@ -1,0 +1,30 @@
+# Copied mostly from https://docs.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=linux#create-the-dockerfile
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+
+ARG serviceName=INVALID_SERVICE_NAME
+ENV ASPNETCORE_URLS='http://+:80;https://+:443'
+
+WORKDIR /app
+
+# Copy files
+# Service
+COPY ./$serviceName ./$serviceName
+# Common
+COPY ./Common ./Common
+# Restore
+WORKDIR /app/$serviceName
+RUN dotnet restore
+# Publish
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+ARG serviceName=INVALID_SERVICE_NAME
+WORKDIR /app
+COPY --from=build-env /app/$serviceName/out .
+
+#ENTRYPOINT ["dotnet", "DeliveryService.dll"]
+ENV dllName=$serviceName
+ENV ASPNETCORE_URLS='http://+:80;https://+:443'
+RUN dotnet dev-certs https
+ENTRYPOINT exec dotnet ${dllName}.dll
