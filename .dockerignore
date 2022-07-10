@@ -1,0 +1,10 @@
+# Copied mostly from https://github.com/dotnet/dotnet-docker/blob/main/samples/aspnetapp/.dockerignore
+# Folders
+**/bin/
+**/obj/
+**/out/
+docker
+
+# Files
+.dockerignore
+*.md
