@@ -7,6 +7,7 @@
   * See <https://docs.docker.com/samples/dotnetcore/> for another dotnet dockerfile sample
   * See <https://docs.docker.com/develop/develop-images/dockerfile_best-practices/> for dockerfile best practices
   * Template Dockerfile so it's the same for both services, configure via args
+    * Cleanup template
 
 ## Demo improvements
 

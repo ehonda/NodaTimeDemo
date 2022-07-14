@@ -22,7 +22,8 @@ ARG serviceName=INVALID_SERVICE_NAME
 WORKDIR /app
 COPY --from=build-env /app/$serviceName/out .
 
-#ENTRYPOINT ["dotnet", "DeliveryService.dll"]
+ARG timeZone='Etc/UTC'
+ENV TZ=$timeZone
 ENV dllName=$serviceName
 ENV ASPNETCORE_URLS='http://+:80'
 #ENV ASPNETCORE_URLS='http://+:80;https://+:443'
