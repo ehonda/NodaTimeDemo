@@ -51,6 +51,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// TODO: Re-enable
+// app.UseHttpsRedirection();
 
 app.Run();
