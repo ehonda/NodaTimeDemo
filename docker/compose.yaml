@@ -1,0 +1,15 @@
+name: foodcomp
+
+services:
+  delivery:
+    #image: delivery-service
+    build:
+      context: ..
+      dockerfile: ./Dockerfile-Services
+      args:
+        - serviceName=DeliveryService
+        - timeZone='Europe/Berlin'
+    container_name: delivery-service
+
+networks:
+  foodcomp:
