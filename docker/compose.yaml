@@ -18,6 +18,8 @@ services:
         - serviceName=DispatchService
         - timeZone=Europe/Berlin
     container_name: dispatch-service
+    depends_on:
+      - delivery
 
   noether:
     build:
@@ -25,6 +27,9 @@ services:
       dockerfile: docker/Dockerfile-Noether
     container_name: noether
     entrypoint: tail -f /dev/null
+    depends_on:
+      - delivery
+      - dispatch
 
 networks:
   foodcomp:
