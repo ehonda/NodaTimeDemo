@@ -5,10 +5,10 @@ services:
     #image: delivery-service
     build:
       context: ..
-      dockerfile: ./Dockerfile-Services
+      dockerfile: docker/Dockerfile-Services
       args:
         - serviceName=DeliveryService
-        - timeZone='Europe/Berlin'
+        - timeZone=Europe/Berlin
     container_name: delivery-service
 
 networks:
