@@ -1,0 +1,13 @@
+FROM alpine:latest
+
+# Install packages
+RUN apk update
+RUN apk add bash
+RUN apk add curl
+RUN apk add jq
+
+# Setup bash aliases
+RUN echo "alias deliveries='curl -s delivery-service/deliveries | jq'" > ~/.bashrc
+RUN echo "alias dispatches='curl -s dispatch-service/dispatches | jq'" >> ~/.bashrc
+
+ENTRYPOINT [ "/bin/bash" ]

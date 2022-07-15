@@ -2,7 +2,6 @@ name: foodcomp
 
 services:
   delivery:
-    #image: delivery-service
     build:
       context: ..
       dockerfile: docker/Dockerfile-Services
@@ -10,6 +9,22 @@ services:
         - serviceName=DeliveryService
         - timeZone=Europe/Berlin
     container_name: delivery-service
+
+  dispatch:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile-Services
+      args:
+        - serviceName=DispatchService
+        - timeZone=Europe/Berlin
+    container_name: dispatch-service
+
+  noether:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile-Noether
+    container_name: noether
+    entrypoint: tail -f /dev/null
 
 networks:
   foodcomp:
