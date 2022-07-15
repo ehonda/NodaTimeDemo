@@ -2,7 +2,6 @@
 
 ## Docker
 
-* Set time zone via variable on `compose up`, not on build
 * Make `noether` stop gracefully
 
 ## Demo improvements

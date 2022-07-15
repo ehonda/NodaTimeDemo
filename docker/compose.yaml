@@ -9,6 +9,8 @@ services:
         - serviceName=DeliveryService
         - timeZone=Europe/Berlin
     container_name: delivery-service
+    env_file:
+      - delivery.env
 
   dispatch:
     build:
@@ -18,6 +20,8 @@ services:
         - serviceName=DispatchService
         - timeZone=Europe/Berlin
     container_name: dispatch-service
+    env_file:
+      - dispatch.env
     depends_on:
       - delivery
 
