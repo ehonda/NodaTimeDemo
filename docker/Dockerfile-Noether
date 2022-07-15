@@ -10,4 +10,9 @@ RUN apk add jq
 RUN echo "alias deliveries='curl -s delivery-service/deliveries | jq'" > ~/.bashrc
 RUN echo "alias dispatches='curl -s dispatch-service/dispatches | jq'" >> ~/.bashrc
 
-ENTRYPOINT [ "/bin/bash" ]
+RUN echo 'trap "exit" SIGTERM; while true; do sleep 1; done' > /home/.keep_alive
+RUN chmod +x /home/.keep_alive
+
+#ENTRYPOINT [ "/bin/bash" ]
+#ENTRYPOINT 'trap "exit" TERM; while true; do sleep 1; done'
+ENTRYPOINT [ "/bin/bash", "-c", "/home/.keep_alive" ]
