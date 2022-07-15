@@ -9,6 +9,8 @@ builder.Services.AddSwaggerGen();
 // App
 var app = builder.Build();
 
+app.UseHttpLogging();
+
 app.MapGet("/deliveries", () => Task.FromResult(Current.Deliveries));
 
 // Configure the HTTP request pipeline.

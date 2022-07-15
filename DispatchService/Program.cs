@@ -35,6 +35,8 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
+app.UseHttpLogging();
+
 app.MapGet("/dispatches", async (DeliveryServiceClient client) =>
 {
     var deliveriesDto = await client.GetDeliveries();
