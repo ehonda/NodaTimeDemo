@@ -30,7 +30,7 @@ services:
       context: ..
       dockerfile: docker/Dockerfile-Noether
     container_name: noether
-    entrypoint: tail -f /dev/null
+    entrypoint: /bin/sh -c /bin/compose_keep_alive
     depends_on:
       - delivery
       - dispatch

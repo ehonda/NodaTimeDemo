@@ -2,7 +2,8 @@
 
 ## Docker
 
-* Make `noether` stop gracefully
+* Make `https` work
+* Read and apply best practices
 
 ## Demo improvements
 
